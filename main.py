@@ -54,4 +54,4 @@ def generate_password():
 
 
 random_pass = generate_password()
-print(random_pass)
+print(f"Your password: {random_pass}")
