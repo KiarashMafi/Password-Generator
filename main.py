@@ -1,57 +1,69 @@
-import random
 import string
+import random
+import pyperclip
 
+alphabets = string.ascii_letters
+numbers = string.digits
+special_char = string.punctuation
 
-def generate_password():
-    password_length = 0
+def get_length():
+    while True:
+
+        try:
+            user_input_length = int(input("Enter your password's length:"))
+
+            if user_input_length < 5:
+                print("Your password is too short")
+
+            else:
+                return user_input_length
+
+        except ValueError:
+            print("Please enter numbers only.")
+
+def get_choices():
+    print("\nSelect all the character types you want in your password.")
+    print("You can pick multiple options. Type the numbers separated by spaces (e.g., 1 2 3):\n")
+    print("1. Letters (A-Z, a-z)")
+    print("2. Numbers (0-9)")
+    print("3. Special characters (!@#$...)")
+
+    valid_choices = {"1", "2", "3"}
+
+    while True:
+        user_input_choice = input("Enter the numbers: ")
+        user_input_choice = user_input_choice.split(" ")
+
+        if all(c in valid_choices for c in user_input_choice):
+            return user_input_choice
+
+        else:
+            print("Invalid selection.")
+
+def generate_password(user_choice, user_length):
     password_chars = ""
-    alphabets = string.ascii_letters
-    numbers = string.digits
-    spec_chars = string.punctuation
 
-    while True:
-        try:
-            password_length = int(input("How many characters do you want in your password? "))
+    if "1" in user_choice:
+        password_chars += alphabets
 
-            if password_length < 5:
-                print("Your password should be at least 5 characters Long.")
+    if "2" in user_choice:
+        password_chars += numbers
 
-            else:
-                break
+    if "3" in user_choice:
+        password_chars += special_char
 
-        except:
-            print("Please enter numbers only.")
+    password = ""
 
-    while True:
-        try:
-            choice = int(input("Pick a number: "))
-
-            if choice == 1:
-                password_chars += alphabets
-
-            elif choice == 2:
-                password_chars += numbers
-
-            elif choice == 3:
-                password_chars += spec_chars
-
-            elif choice == 4:
-                break
-
-            else:
-                print("Error: please pick a number from 1 to 4!")
-
-        except:
-            print("Please enter numbers only.")
-
-    password = []
-    for i in range(password_length):
+    for i in range(user_length):
         random_char = random.choice(password_chars)
-        password.append(random_char)
+        password += random_char
 
-    password = "".join(password)
     return password
 
+length = get_length()
+choice = get_choices()
+final_pass = generate_password(choice, length)
+pyperclip.copy(final_pass)
 
-random_pass = generate_password()
-print(f"Your password: {random_pass}")
+print(f"Your final password is:{final_pass}. Password copied to clipboard")
+
