@@ -71,15 +71,6 @@ Enter the numbers: 1 2 3
 Your final password is: V9@pwb!K3#az. Password copied to clipboard
 ```
 
----
-
-## 📌 Notes
-
-- This generator currently does **not guarantee** at least one character from each selected category will appear in every password. (You can add that if desired.)
-- To make the password regeneration feature or enforce character category presence, check out possible improvements in the logic.
-
----
-
 ## 📄 License
 
 This project is open source and free to use. No license specified.
